@@ -22,6 +22,8 @@
 #define ID_BUTTON2				201
 #define ID_RBUTTON1				210
 #define ID_RBUTTON2				211
+#define ID_BUTTON3				212
+#define ID_BUTTON4				213
 
 // Next default values for new objects
 //
