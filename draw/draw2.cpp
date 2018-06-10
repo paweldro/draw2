@@ -1,7 +1,8 @@
 // draw.cpp : Defines the entry point for the application.
 //penis
-//Dmytro Bohynskyi
+//Dmytro Bohynskyi - peda³
 // .I.
+//fhhkfh
 
 #include "stdafx.h"
 #include "draw2.h"
