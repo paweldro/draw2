@@ -1,10 +1,5 @@
 // draw.cpp : Defines the entry point for the application.
-<<<<<<< HEAD
 //
-=======
-//penis
-//Dmytro Bohynskyi
->>>>>>> d104c75dc4ced5170650b967ca92164887dfde34
 
 #include "stdafx.h"
 #include "draw2.h"
@@ -41,7 +36,7 @@ int klocek_4; int klocek_5; int klocek_6;
 
 std::vector<Point> data;
 RECT drawArea1 = { 0, 0, 150, 200 };
-RECT drawArea2 = { 50, 400, 650, 422};
+RECT drawArea2 = { 50, 400, 650, 422 };
 
 // Forward declarations of functions included in this code module:
 ATOM				MyRegisterClass(HINSTANCE hInstance);
@@ -55,15 +50,15 @@ void MyOnPaint(HDC hdc)
 {
 	Graphics graphics(hdc);
 	Pen pen(Color(255, 0, 0, 255));
-	Pen pen2(Color(255, 25*col, 0, 255));
+	Pen pen2(Color(255, 25 * col, 0, 255));
 
 	graphics.DrawLine(&pen2, 0, 250, 500, 250); //
-	graphics.DrawLine(&pen2, 250,0,250,500);
+	graphics.DrawLine(&pen2, 250, 0, 250, 500);
 
 	Ax = Ramie * cos(Alfa *Pi / 180) + Ox;
 	Ay = -Ramie * sin(Alfa *Pi / 180) + Oy;
 
-	graphics.DrawLine(&pen,Ox ,Oy , Ax, Ay);
+	graphics.DrawLine(&pen, Ox, Oy, Ax, Ay);
 
 	Bx = Ramie * cos(Beta *Pi / 180) + Ax;
 	By = -Ramie * sin(Beta *Pi / 180) + Ay;
@@ -72,7 +67,7 @@ void MyOnPaint(HDC hdc)
 	{
 		if (Bx >= klocek_1[0] && By >= klocek_1[1] && Bx <= (klocek_1[0] + 30) && By <= (klocek_1[1] + 30))
 		{
-			Zlapane == true;
+			Zlapane = true;
 		}
 		if (Zlapane == true)
 		{
@@ -82,7 +77,7 @@ void MyOnPaint(HDC hdc)
 
 		graphics.DrawRectangle(&pen, klocek_1[0], klocek_1[1], 30, 30);
 	}
-	else 
+	else
 	{
 		graphics.DrawRectangle(&pen, klocek_1[0], klocek_1[1], 30, 30);
 	}
@@ -90,7 +85,7 @@ void MyOnPaint(HDC hdc)
 
 void repaintWindow(HWND hWnd, HDC &hdc, PAINTSTRUCT &ps, RECT *drawArea)
 {
-	if (drawArea==NULL)
+	if (drawArea == NULL)
 		InvalidateRect(hWnd, NULL, TRUE); // repaint all
 	else
 		InvalidateRect(hWnd, drawArea, TRUE); //repaint drawArea
@@ -201,12 +196,12 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 	hInst = hInstance; // Store instance handle (of exe) in our global variable
 
-	// main window
+					   // main window
 	hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
 
 	// create button and store the handle                                                       
-	
+
 	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
 		TEXT("Alfa minus"),                  // the caption of the button
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
@@ -293,40 +288,40 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case IDM_EXIT:
 			DestroyWindow(hWnd);
 			break;
-		case ID_BUTTON1 :
-			if (Ay< Oy - 1 && By < Oy - 1)
-				 Alfa = Alfa - 1;
-			if (Ax < Ox )
-				Alfa = Alfa - 1;
+		case ID_BUTTON1:
+			if (Ay< Oy - 5 && By < Oy - 5)
+				Alfa = Alfa - 5;
+			if (Ax < Ox)
+				Alfa = Alfa - 5;
 			repaintWindow(hWnd, hdc, ps, NULL);
 			break;
-		case ID_BUTTON2 :
-			if (Ay< Oy - 1 && By < Oy - 1)
-				Alfa = Alfa + 1;
-			if (Ax > Ox )
-				Alfa = Alfa + 1;
+		case ID_BUTTON2:
+			if (Ay< Oy - 5 && By < Oy - 5)
+				Alfa = Alfa + 5;
+			if (Ax > Ox)
+				Alfa = Alfa + 5;
 			repaintWindow(hWnd, hdc, ps, NULL);
 			break;
 		case ID_BUTTON3:
-			if (By  < Oy - 1)
-				Beta = Beta - 1;
+			if (By  < Oy - 5)
+				Beta = Beta - 5;
 
-			if(Bx < Ox && Bx != Ox)
-				Beta = Beta - 1;
+			if (Bx < Ox && Bx != Ox)
+				Beta = Beta - 5;
 			repaintWindow(hWnd, hdc, ps, NULL);
 			break;
 		case ID_BUTTON4:
-			if ( By  < Oy - 1)
-				Beta = Beta + 1;
+			if (By  < Oy - 5)
+				Beta = Beta + 5;
 			if (Bx > Ox && Bx != Ox)
-				Beta = Beta + 1;
+				Beta = Beta + 5;
 			repaintWindow(hWnd, hdc, ps, NULL);
 			break;
 
 		case ID_RBUTTON1:
 			if (Zlap == true)
 			{
-				Zlapane == true;
+				Zlapane = false;
 				Zlap = false;
 			}
 			else
