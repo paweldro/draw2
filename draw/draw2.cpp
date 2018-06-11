@@ -5,6 +5,7 @@
 #include "draw2.h"
 #include <vector>
 #include <cstdio>
+#include<iostream>
 
 #define MAX_LOADSTRING 100
 #define TMR_1 1
@@ -18,6 +19,7 @@ INT value;
 
 // buttons
 HWND hwndButton;
+int Otwarto = 1;
 bool Zlap = false;
 bool Zlapane = false;
 double Pi = 3.14;
@@ -30,8 +32,8 @@ int Ox = 250;
 int Oy = 250;
 int Ax; int Ay; int Bx; int By;
 
-int klocek_1[2] = { 270,120 }; int klocek_2; int klocek_3;
-int klocek_4; int klocek_5; int klocek_6;
+int klocek[6][2];
+
 
 
 std::vector<Point> data;
@@ -63,24 +65,31 @@ void MyOnPaint(HDC hdc)
 	Bx = Ramie * cos(Beta *Pi / 180) + Ax;
 	By = -Ramie * sin(Beta *Pi / 180) + Ay;
 	graphics.DrawLine(&pen, Ax, Ay, Bx, By);
-	if (Zlap == true)
+	for (int i = 0; i < 6; i++)
 	{
-		if (Bx >= klocek_1[0] && By >= klocek_1[1] && Bx <= (klocek_1[0] + 30) && By <= (klocek_1[1] + 30))
+		if (i<Otwarto)
 		{
-			Zlapane = true;
-		}
-		if (Zlapane == true)
-		{
-			klocek_1[0] = Bx;
-			klocek_1[1] = By;
-		}
+			if (Zlap == true)
+			{
+				if (Bx >= klocek[i][0] && By >= klocek[i][1] && Bx <= (klocek[i][0] + 30) && By <= (klocek[i][1] + 30))
+				{
+					Zlapane = true;
+				}
+				if (Zlapane == true)
+				{
+					klocek[i][0] = Bx;
+					klocek[i][1] = By;
+				}
 
-		graphics.DrawRectangle(&pen, klocek_1[0], klocek_1[1], 30, 30);
+				graphics.DrawRectangle(&pen, klocek[i][0], klocek[i][1], 30, 30);
+			}
+			else
+			{
+				graphics.DrawRectangle(&pen, klocek[i][0], klocek[i][1], 30, 30);
+			}
+		}
 	}
-	else
-	{
-		graphics.DrawRectangle(&pen, klocek_1[0], klocek_1[1], 30, 30);
-	}
+
 }
 
 void repaintWindow(HWND hWnd, HDC &hdc, PAINTSTRUCT &ps, RECT *drawArea)
@@ -240,6 +249,15 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		(HMENU)ID_BUTTON4,                   // the ID of your button
 		hInstance,                            // the instance of your application
 		NULL);
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+		TEXT("Otw"),                  // the caption of the button
+		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
+		710, 300,                                  // the left and top co-ordinates
+		200, 50,                              // width and height
+		hWnd,                                 // parent window handle
+		(HMENU)ID_BUTTON5,                   // the ID of your button
+		hInstance,                            // the instance of your application
+		NULL);
 
 	hwndButton = CreateWindow(TEXT("button"), TEXT("Wykres X"),
 		WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX,
@@ -248,6 +266,12 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	if (!hWnd)
 	{
 		return FALSE;
+	}
+
+	for (int i = 0; i < 6; i++)
+	{
+		klocek[i][0] = 200 + i*35;
+		klocek[i][1] = 160;
 	}
 
 	ShowWindow(hWnd, nCmdShow);
@@ -315,6 +339,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				Beta = Beta + 5;
 			if (Bx > Ox && Bx != Ox)
 				Beta = Beta + 5;
+			repaintWindow(hWnd, hdc, ps, NULL);
+			break;
+		case ID_BUTTON5:
+			Otwarto++;
 			repaintWindow(hWnd, hdc, ps, NULL);
 			break;
 
