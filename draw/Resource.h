@@ -22,7 +22,13 @@
 #define ID_BUTTON2				201
 #define ID_RBUTTON1				210
 #define ID_RBUTTON2				211
-
+#define ID_BUTTON3				212
+#define ID_BUTTON4				213
+#define ID_BUTTON5				214
+#define ID_BUTTON6				215
+#define ID_BUTTON7				216
+#define ID_BUTTON8				217
+#define ID_BUTTON9				218
 // Next default values for new objects
 //
 #ifdef APSTUDIO_INVOKED

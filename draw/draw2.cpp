@@ -1,5 +1,5 @@
 // draw.cpp : Defines the entry point for the application.
-//penis
+//
 
 #include "stdafx.h"
 #include "draw2.h"
@@ -18,9 +18,22 @@ INT value;
 
 // buttons
 HWND hwndButton;
-
+bool Zlap = false;
+bool Zlapane = false;
+double Pi = 3.14;
+int Ramie = 100; //
+int Alfa = 45;
+int Beta = 0;
 // sent data
 int col = 0;
+int Ox = 250;
+int Oy = 250;
+int Ax; int Ay; int Bx; int By;
+
+int klocek_1[2] = { 270,120 }; int klocek_2; int klocek_3;
+int klocek_4; int klocek_5; int klocek_6;
+
+
 std::vector<Point> data;
 RECT drawArea1 = { 0, 0, 150, 200 };
 RECT drawArea2 = { 50, 400, 650, 422};
@@ -39,12 +52,35 @@ void MyOnPaint(HDC hdc)
 	Pen pen(Color(255, 0, 0, 255));
 	Pen pen2(Color(255, 25*col, 0, 255));
 
-	/*for (int i = 1; i < 100; i++)
-		graphics.DrawLine(&pen2, data[i - 1].X, data[i - 1].Y, data[i].X, data[i].Y);
-*/
-	graphics.DrawLine(&pen2, 10, 10, 20, 20);
+	graphics.DrawLine(&pen2, 0, 250, 500, 250); //
+	graphics.DrawLine(&pen2, 250,0,250,500);
 
-	graphics.DrawRectangle(&pen, 50 + value, 400, 10, 20);
+	Ax = Ramie * cos(Alfa *Pi / 180) + Ox;
+	Ay = -Ramie * sin(Alfa *Pi / 180) + Oy;
+
+	graphics.DrawLine(&pen,Ox ,Oy , Ax, Ay);
+
+	Bx = Ramie * cos(Beta *Pi / 180) + Ax;
+	By = -Ramie * sin(Beta *Pi / 180) + Ay;
+	graphics.DrawLine(&pen, Ax, Ay, Bx, By);
+	if (Zlap == true)
+	{
+		if (Bx >= klocek_1[0] && By >= klocek_1[1] && Bx <= (klocek_1[0] + 30) && By <= (klocek_1[1] + 30))
+		{
+			Zlapane == true;
+		}
+		if (Zlapane == true)
+		{
+			klocek_1[0] = Bx;
+			klocek_1[1] = By;
+		}
+
+		graphics.DrawRectangle(&pen, klocek_1[0], klocek_1[1], 30, 30);
+	}
+	else 
+	{
+		graphics.DrawRectangle(&pen, klocek_1[0], klocek_1[1], 30, 30);
+	}
 }
 
 void repaintWindow(HWND hWnd, HDC &hdc, PAINTSTRUCT &ps, RECT *drawArea)
@@ -57,22 +93,6 @@ void repaintWindow(HWND hWnd, HDC &hdc, PAINTSTRUCT &ps, RECT *drawArea)
 	MyOnPaint(hdc);
 	EndPaint(hWnd, &ps);
 }
-
-//void inputData()
-//{	
-//	data.push_back(Point(0, 0));
-//	for (int i = 1; i < 100; i++){
-//		data.push_back(Point(2*i+1, 200 * rand()/RAND_MAX));
-//	}
-//}
-//
-//
-//int OnCreate(HWND window)
-//{
-//	inputData();
-//	return 0;
-//}
-
 
 // main function (exe hInstance)
 int APIENTRY _tWinMain(HINSTANCE hInstance,
@@ -183,36 +203,47 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	// create button and store the handle                                                       
 	
 	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
-		TEXT("Draw"),                  // the caption of the button
+		TEXT("Alfa minus"),                  // the caption of the button
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
-		300, 60,                                  // the left and top co-ordinates
-		80, 50,                              // width and height
+		600, 30,                                  // the left and top co-ordinates
+		100, 50,                              // width and height
 		hWnd,                                 // parent window handle
 		(HMENU)ID_BUTTON1,                   // the ID of your button
 		hInstance,                            // the instance of your application
 		NULL);                               // extra bits you dont really need
 
-	//hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
-	//	TEXT("DrawAll"),                  // the caption of the button
-	//	WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
-	//	300, 0,                                  // the left and top co-ordinates
-	//	80, 50,                              // width and height
-	//	hWnd,                                 // parent window handle
-	//	(HMENU)ID_BUTTON2,                   // the ID of your button
-	//	hInstance,                            // the instance of your application
-	//	NULL);                               // extra bits you dont really need
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+		TEXT("Alfa plus"),                  // the caption of the button
+		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
+		710, 30,                                  // the left and top co-ordinates
+		100, 50,                              // width and height
+		hWnd,                                 // parent window handle
+		(HMENU)ID_BUTTON2,                   // the ID of your button
+		hInstance,                            // the instance of your application
+		NULL);                              // extra bits you dont really need
 
-	//// create button and store the handle                                                       
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+		TEXT("Beta minus"),                  // the caption of the button
+		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
+		600, 100,                                  // the left and top co-ordinates
+		100, 50,                              // width and height
+		hWnd,                                 // parent window handle
+		(HMENU)ID_BUTTON3,                   // the ID of your button
+		hInstance,                            // the instance of your application
+		NULL);
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+		TEXT("Beta plus"),                  // the caption of the button
+		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
+		710, 100,                                  // the left and top co-ordinates
+		100, 50,                              // width and height
+		hWnd,                                 // parent window handle
+		(HMENU)ID_BUTTON4,                   // the ID of your button
+		hInstance,                            // the instance of your application
+		NULL);
 
-	//hwndButton = CreateWindow(TEXT("button"), TEXT("Timer ON"),
-	//	WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON,
-	//	300, 155, 100, 30, hWnd, (HMENU)ID_RBUTTON1, GetModuleHandle(NULL), NULL);
-
-	//hwndButton = CreateWindow(TEXT("button"), TEXT("Timer OFF"),
-	//	WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON,
-	//	300, 200, 100, 30, hWnd, (HMENU)ID_RBUTTON2, GetModuleHandle(NULL), NULL);
-
-	//OnCreate(hWnd);
+	hwndButton = CreateWindow(TEXT("button"), TEXT("Wykres X"),
+		WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX,
+		460, 360, 100, 30, hWnd, (HMENU)ID_RBUTTON1, GetModuleHandle(NULL), NULL);
 
 	if (!hWnd)
 	{
@@ -251,29 +282,52 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		// Parse the menu selections:
 		switch (wmId)
 		{
-		/*case IDM_ABOUT:
+		case IDM_ABOUT:
 			DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
 			break;
 		case IDM_EXIT:
 			DestroyWindow(hWnd);
 			break;
 		case ID_BUTTON1 :
-			col++;
-			if (col > 10)
-				col = 0;
-			repaintWindow(hWnd, hdc, ps, &drawArea1);
-			break;
-		case ID_BUTTON2 :
+			if (Ay< Oy - 1 && By < Oy - 1)
+				 Alfa = Alfa - 1;
+			if (Ax < Ox )
+				Alfa = Alfa - 1;
 			repaintWindow(hWnd, hdc, ps, NULL);
 			break;
+		case ID_BUTTON2 :
+			if (Ay< Oy - 1 && By < Oy - 1)
+				Alfa = Alfa + 1;
+			if (Ax > Ox )
+				Alfa = Alfa + 1;
+			repaintWindow(hWnd, hdc, ps, NULL);
+			break;
+		case ID_BUTTON3:
+			if (By  < Oy - 1)
+				Beta = Beta - 1;
+
+			if(Bx < Ox && Bx != Ox)
+				Beta = Beta - 1;
+			repaintWindow(hWnd, hdc, ps, NULL);
+			break;
+		case ID_BUTTON4:
+			if ( By  < Oy - 1)
+				Beta = Beta + 1;
+			if (Bx > Ox && Bx != Ox)
+				Beta = Beta + 1;
+			repaintWindow(hWnd, hdc, ps, NULL);
+			break;
+
 		case ID_RBUTTON1:
-			SetTimer(hWnd, TMR_1, 25, 0);
-			break;
-		case ID_RBUTTON2:
-			KillTimer(hWnd, TMR_1);
-			break;
+			if (Zlap == true)
+			{
+				Zlapane == true;
+				Zlap = false;
+			}
+			else
+				Zlap = true;
 		default:
-			return DefWindowProc(hWnd, message, wParam, lParam);*/
+			return DefWindowProc(hWnd, message, wParam, lParam);
 		}
 		break;
 	case WM_PAINT:
