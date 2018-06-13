@@ -94,14 +94,13 @@ void MyOnPaint(HDC hdc)
 	else
 	{
 		if (numerek == 1) {
-			for (int i = Bx - 250; i < Bx - 220; i++) {
-				warstwa[i] ++;
-			}
-
+			
 			for (int i = Bx - 250; i < Bx - 220; i++) {
 				if (warstwa[i] > max) {
 					max = warstwa[i];
 				}
+				
+
 
 			}
 			for (int i = Bx - 250; i < Bx - 220; i++) {
@@ -109,6 +108,9 @@ void MyOnPaint(HDC hdc)
 				warstwa[i] = max;
 
 
+			}
+			for (int i = Bx - 250; i < Bx - 220; i++) {
+				warstwa[i] ++;
 			}
 			numerek = 0;
 			klocek_1[numer_klockaX] = 220 - (max * 30);
