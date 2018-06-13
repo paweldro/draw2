@@ -18,17 +18,21 @@
 #define IDC_STATIC				-1
 #endif
 // Values for other objects (eg. buttons)
+
 #define ID_BUTTON1				200
 #define ID_BUTTON2				201
 #define ID_RBUTTON1				210
-#define ID_RBUTTON2				211
-#define ID_BUTTON3				212
-#define ID_BUTTON4				213
-#define ID_BUTTON5				214
-#define ID_BUTTON6				215
-#define ID_BUTTON7				216
-#define ID_BUTTON8				217
-#define ID_BUTTON9				218
+/*#define ID_RBUTTON2				211
+#define ID_RBUTTON3				212
+#define ID_RBUTTON4				213
+#define ID_RBUTTON5				214
+#define ID_RBUTTON6				215*/
+#define ID_BUTTON3				216
+#define ID_BUTTON4				217
+#define ID_BUTTON5				218
+#define ID_BUTTON6				219
+#define ID_BUTTON7				220
+#define ID_BUTTON8				221
 
 // Next default values for new objects
 //

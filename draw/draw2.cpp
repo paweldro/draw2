@@ -5,7 +5,29 @@
 #include "draw2.h"
 #include <vector>
 #include <cstdio>
-#include<iostream>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #define MAX_LOADSTRING 100
 #define TMR_1 1
@@ -19,21 +41,26 @@ INT value;
 
 // buttons
 HWND hwndButton;
-int Otwarto = 1;
 bool Zlap = false;
 bool Zlapane = false;
+bool puscilem = false;
 double Pi = 3.14;
 int Ramie = 100; //
 int Alfa = 45;
 int Beta = 0;
+int numerek = 0;
 // sent data
 int col = 0;
 int Ox = 250;
 int Oy = 250;
 int Ax; int Ay; int Bx; int By;
 
-int klocek[6][2];
+int warstwa[250] = { 0 };
+int max = 0;
+int numer_klockaX = 1;
+int numer_klockaY = 0;
 
+int klocek_1[13] = { 270,120,100,150,130,150,160,150,190,150,220,150 };
 
 
 std::vector<Point> data;
@@ -52,10 +79,10 @@ void MyOnPaint(HDC hdc)
 {
 	Graphics graphics(hdc);
 	Pen pen(Color(255, 0, 0, 255));
-	Pen pen2(Color(255, 25 * col, 0, 255));
+	Pen pen2(Color(255, 255, 0, 0));
 
-	graphics.DrawLine(&pen2, 0, 250, 500, 250); //
-	graphics.DrawLine(&pen2, 250, 0, 250, 500);
+	graphics.DrawLine(&pen, 0, 250, 500, 250); //
+	graphics.DrawLine(&pen, 250, 0, 250, 500);
 
 	Ax = Ramie * cos(Alfa *Pi / 180) + Ox;
 	Ay = -Ramie * sin(Alfa *Pi / 180) + Oy;
@@ -65,31 +92,75 @@ void MyOnPaint(HDC hdc)
 	Bx = Ramie * cos(Beta *Pi / 180) + Ax;
 	By = -Ramie * sin(Beta *Pi / 180) + Ay;
 	graphics.DrawLine(&pen, Ax, Ay, Bx, By);
-	for (int i = 0; i < 6; i++)
+	if (Zlap == true)
 	{
-		if (i<Otwarto)
+		if (Bx >= klocek_1[numer_klockaY] && By >= klocek_1[numer_klockaX] && Bx <= (klocek_1[numer_klockaY] + 30) && By <= (klocek_1[numer_klockaX] + 30))
 		{
-			if (Zlap == true)
-			{
-				if (Bx >= klocek[i][0] && By >= klocek[i][1] && Bx <= (klocek[i][0] + 30) && By <= (klocek[i][1] + 30))
-				{
-					Zlapane = true;
-				}
-				if (Zlapane == true)
-				{
-					klocek[i][0] = Bx;
-					klocek[i][1] = By;
+			Zlapane = true;
+		}
+		if (Zlapane == true)
+		{
+			klocek_1[numer_klockaY] = Bx;
+			klocek_1[numer_klockaX] = By;
+		}
+
+		graphics.DrawRectangle(&pen, klocek_1[0], klocek_1[1], 30, 30);
+		graphics.DrawRectangle(&pen, klocek_1[2], klocek_1[3], 30, 30);
+		graphics.DrawRectangle(&pen, klocek_1[4], klocek_1[5], 30, 30);
+		graphics.DrawRectangle(&pen, klocek_1[6], klocek_1[7], 30, 30);
+		graphics.DrawRectangle(&pen, klocek_1[8], klocek_1[9], 30, 30);
+		graphics.DrawRectangle(&pen, klocek_1[10], klocek_1[11], 30, 30);
+		graphics.DrawRectangle(&pen2, klocek_1[numer_klockaY], klocek_1[numer_klockaX], 30, 30);
+
+	}
+	else
+	{
+		if (numerek == 1) {
+			for (int i = Bx - 250; i < Bx - 220; i++) {
+				warstwa[i] ++;
+			}
+
+			for (int i = Bx - 250; i < Bx - 220; i++) {
+				if (warstwa[i] > max) {
+					max = warstwa[i];
 				}
 
-				graphics.DrawRectangle(&pen, klocek[i][0], klocek[i][1], 30, 30);
 			}
-			else
-			{
-				graphics.DrawRectangle(&pen, klocek[i][0], klocek[i][1], 30, 30);
+			for (int i = Bx - 250; i < Bx - 220; i++) {
+
+				warstwa[i] = max;
+
+
 			}
+			numerek = 0;
+			klocek_1[numer_klockaX] = 220 - (max * 30);
+			max = 0;
 		}
+
+		//klocek_1[numer_klockaX] = 220 - (max * 30);
+		graphics.DrawRectangle(&pen, klocek_1[0], klocek_1[1], 30, 30);
+		graphics.DrawRectangle(&pen, klocek_1[2], klocek_1[3], 30, 30);
+		graphics.DrawRectangle(&pen, klocek_1[4], klocek_1[5], 30, 30);
+		graphics.DrawRectangle(&pen, klocek_1[6], klocek_1[7], 30, 30);
+		graphics.DrawRectangle(&pen, klocek_1[8], klocek_1[9], 30, 30);
+		graphics.DrawRectangle(&pen, klocek_1[10], klocek_1[11], 30, 30);
+		graphics.DrawRectangle(&pen2, klocek_1[numer_klockaY], klocek_1[numer_klockaX], 30, 30);
+	}
+}
+
+void Klocek(int numerekX, int numerekY)
+{
+	for (int i = Bx - 250; i < Bx - 220; i++) {
+		warstwa[Bx] ++;
 	}
 
+	for (int i = Bx - 250; i < Bx - 220; i++) {
+		if (warstwa[i] > max) {
+			max = warstwa[i];
+		}
+	}
+	klocek_1[numerekX] = 220 - (max * 30);
+	klocek_1[numerekY] = Bx;
 }
 
 void repaintWindow(HWND hWnd, HDC &hdc, PAINTSTRUCT &ps, RECT *drawArea)
@@ -250,28 +321,69 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		hInstance,                            // the instance of your application
 		NULL);
 	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
-		TEXT("Otw"),                  // the caption of the button
+		TEXT("Numer klocka plus"),                  // the caption of the button
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
-		710, 300,                                  // the left and top co-ordinates
-		200, 50,                              // width and height
+		600, 170,                                  // the left and top co-ordinates
+		150, 50,                              // width and height
 		hWnd,                                 // parent window handle
 		(HMENU)ID_BUTTON5,                   // the ID of your button
 		hInstance,                            // the instance of your application
 		NULL);
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+		TEXT("Numer klocka minus"),                  // the caption of the button
+		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
+		750, 170,                                  // the left and top co-ordinates
+		150, 50,                              // width and height
+		hWnd,                                 // parent window handle
+		(HMENU)ID_BUTTON6,                   // the ID of your button
+		hInstance,                            // the instance of your application
+		NULL);
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+		TEXT("Zlap mnie"),                  // the caption of the button
+		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
+		600, 240,                                  // the left and top co-ordinates
+		100, 50,                              // width and height
+		hWnd,                                 // parent window handle
+		(HMENU)ID_BUTTON7,                   // the ID of your button
+		hInstance,                            // the instance of your application
+		NULL);
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+		TEXT("Mo¿esz ju¿ mnie puœciæ "),                  // the caption of the button
+		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
+		600, 310,                                  // the left and top co-ordinates
+		300, 50,                              // width and height
+		hWnd,                                 // parent window handle
+		(HMENU)ID_BUTTON8,                   // the ID of your button
+		hInstance,                            // the instance of your application
+		NULL);
 
-	hwndButton = CreateWindow(TEXT("button"), TEXT("Wykres X"),
+	hwndButton = CreateWindow(TEXT("button"), TEXT("Kwadrat 1 "),
 		WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX,
 		460, 360, 100, 30, hWnd, (HMENU)ID_RBUTTON1, GetModuleHandle(NULL), NULL);
+	/*
+	hwndButton = CreateWindow(TEXT("button"), TEXT("Kwadrat 2 "),
+	WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX,
+	460, 360, 100, 30, hWnd, (HMENU)ID_RBUTTON2, GetModuleHandle(NULL), NULL);
+
+	hwndButton = CreateWindow(TEXT("button"), TEXT("Kwadrat 3 "),
+	WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX,
+	460, 360, 100, 30, hWnd, (HMENU)ID_RBUTTON3, GetModuleHandle(NULL), NULL);
+
+	hwndButton = CreateWindow(TEXT("button"), TEXT("Kwadrat 4 "),
+	WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX,
+	460, 360, 100, 30, hWnd, (HMENU)ID_RBUTTON4, GetModuleHandle(NULL), NULL);
+
+	hwndButton = CreateWindow(TEXT("button"), TEXT("Kwadrat 5 "),
+	WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX,
+	460, 360, 100, 30, hWnd, (HMENU)ID_RBUTTON5, GetModuleHandle(NULL), NULL);
+
+	hwndButton = CreateWindow(TEXT("button"), TEXT("Kwadrat 6 "),
+	WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX,
+	460, 360, 100, 30, hWnd, (HMENU)ID_RBUTTON6, GetModuleHandle(NULL), NULL);*/
 
 	if (!hWnd)
 	{
 		return FALSE;
-	}
-
-	for (int i = 0; i < 6; i++)
-	{
-		klocek[i][0] = 200 + i*35;
-		klocek[i][1] = 160;
 	}
 
 	ShowWindow(hWnd, nCmdShow);
@@ -341,9 +453,44 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				Beta = Beta + 5;
 			repaintWindow(hWnd, hdc, ps, NULL);
 			break;
+
 		case ID_BUTTON5:
-			Otwarto++;
-			repaintWindow(hWnd, hdc, ps, NULL);
+			if (numer_klockaX < 13)
+				Zlapane = false;
+			numer_klockaX += 2;
+			numer_klockaY += 2;
+			break;
+		case ID_BUTTON6:
+			if (numer_klockaX > 0)
+				Zlapane = false;
+			numer_klockaX -= 2;
+			numer_klockaY -= 2;
+			break;
+
+		case ID_BUTTON7:
+			if (Bx >= klocek_1[0] && Bx <= (klocek_1[0] + 30) && By >= klocek_1[1] && By <= (klocek_1[1] + 30))
+			{
+				Zlapane = true;
+
+				klocek_1[0] = Bx;
+				klocek_1[1] = By;
+			}
+			break;
+
+		case ID_BUTTON8:
+			//if (Bx == klocek_1[0] && By == klocek_1[1] )
+			//{
+			//puscilem = true;
+			//klocek_1[0] = Bx;
+			//klocek_1[1] = By;
+			//	}
+			Klocek(numer_klockaX, numer_klockaY);
+			puscilem = true;
+			//for (int i = Bx - 250; i < Bx - 220; i++) {
+			//	warstwa[Bx] ++;
+			//	}
+
+
 			break;
 
 		case ID_RBUTTON1:
@@ -351,9 +498,62 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			{
 				Zlapane = false;
 				Zlap = false;
+				numerek = 1;
 			}
 			else
 				Zlap = true;
+			Zlapane = false;
+			break;
+			/*
+			case ID_RBUTTON2:
+			if (Zlap == true)
+			{
+			Zlapane = false;
+			Zlap = false;
+			}
+			else
+			Zlap = true;
+			break;
+
+			case ID_RBUTTON3:
+			if (Zlap == true)
+			{
+			Zlapane = false;
+			Zlap = false;
+			}
+			else
+			Zlap = true;
+			break;
+
+			case ID_RBUTTON4:
+			if (Zlap == true)
+			{
+			Zlapane = false;
+			Zlap = false;
+			}
+			else
+			Zlap = true;
+			break;
+
+			case ID_RBUTTON5:
+			if (Zlap == true)
+			{
+			Zlapane = false;
+			Zlap = false;
+			}
+			else
+			Zlap = true;
+			break;
+
+			case ID_RBUTTON6:
+			if (Zlap == true)
+			{
+			Zlapane = false;
+			Zlap = false;
+			}
+			else
+			Zlap = true;
+			break;*/
 		default:
 			return DefWindowProc(hWnd, message, wParam, lParam);
 		}
