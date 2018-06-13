@@ -337,29 +337,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		hInstance,                            // the instance of your application
 		NULL);
 
-	hwndButton = CreateWindow(TEXT("button"), TEXT("Kwadrat 1 "),
+	hwndButton = CreateWindow(TEXT("button"), TEXT("Zlap klocek "),
 		WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX,
-		460, 360, 100, 30, hWnd, (HMENU)ID_RBUTTON1, GetModuleHandle(NULL), NULL);
-	/*
-	hwndButton = CreateWindow(TEXT("button"), TEXT("Kwadrat 2 "),
-	WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX,
-	460, 360, 100, 30, hWnd, (HMENU)ID_RBUTTON2, GetModuleHandle(NULL), NULL);
-
-	hwndButton = CreateWindow(TEXT("button"), TEXT("Kwadrat 3 "),
-	WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX,
-	460, 360, 100, 30, hWnd, (HMENU)ID_RBUTTON3, GetModuleHandle(NULL), NULL);
-
-	hwndButton = CreateWindow(TEXT("button"), TEXT("Kwadrat 4 "),
-	WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX,
-	460, 360, 100, 30, hWnd, (HMENU)ID_RBUTTON4, GetModuleHandle(NULL), NULL);
-
-	hwndButton = CreateWindow(TEXT("button"), TEXT("Kwadrat 5 "),
-	WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX,
-	460, 360, 100, 30, hWnd, (HMENU)ID_RBUTTON5, GetModuleHandle(NULL), NULL);
-
-	hwndButton = CreateWindow(TEXT("button"), TEXT("Kwadrat 6 "),
-	WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX,
-	460, 360, 100, 30, hWnd, (HMENU)ID_RBUTTON6, GetModuleHandle(NULL), NULL);*/
+		650, 80, 100, 20, hWnd, (HMENU)ID_RBUTTON1, GetModuleHandle(NULL), NULL);
 
 	if (!hWnd)
 	{
