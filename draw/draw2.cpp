@@ -439,12 +439,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				Zlapane = false;
 			numer_klockaX += 2;
 			numer_klockaY += 2;
+			repaintWindow(hWnd, hdc, ps, NULL);
 			break;
 		case ID_BUTTON6:
 			if (numer_klockaX > 0)
 				Zlapane = false;
 			numer_klockaX -= 2;
 			numer_klockaY -= 2;
+			repaintWindow(hWnd, hdc, ps, NULL);
 			break;
 
 		case ID_BUTTON7:
