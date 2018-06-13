@@ -7,28 +7,6 @@
 #include <cstdio>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #define MAX_LOADSTRING 100
 #define TMR_1 1
 
