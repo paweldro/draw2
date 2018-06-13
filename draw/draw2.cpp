@@ -26,6 +26,7 @@ int Ramie = 100;
 int Alfa = 45;
 int Beta = 0;
 int numerek = 0;
+int max = 0;
 // sent data
 int col = 0;
 int Ox = 250;
@@ -33,7 +34,6 @@ int Oy = 250;
 int Ax; int Ay; int Bx; int By;
 
 int warstwa[250] = { 0 };
-int max = 0;
 int numer_klockaX = 1;
 int numer_klockaY = 0;
 
@@ -92,24 +92,15 @@ void MyOnPaint(HDC hdc)
 	}
 	else
 	{
-		if (numerek == 1) {
+		if (numerek == 1 && klocek_1[numer_klockaX] != 220) {
 			
 			for (int i = Bx - 250; i < Bx - 220; i++) {
 				if (warstwa[i] > max) {
 					max = warstwa[i];
-				}
-				
-
-
+				}				
 			}
 			for (int i = Bx - 250; i < Bx - 220; i++) {
-
-				warstwa[i] = max;
-
-
-			}
-			for (int i = Bx - 250; i < Bx - 220; i++) {
-				warstwa[i] ++;
+				warstwa[i] = max + 1;
 			}
 			numerek = 0;
 			klocek_1[numer_klockaX] = 220 - (max * 30);
@@ -126,20 +117,6 @@ void MyOnPaint(HDC hdc)
 	}
 }
 
-void Klocek(int numerekX, int numerekY)
-{
-	for (int i = Bx - 250; i < Bx - 220; i++) {
-		warstwa[Bx] ++;
-	}
-
-	for (int i = Bx - 250; i < Bx - 220; i++) {
-		if (warstwa[i] > max) {
-			max = warstwa[i];
-		}
-	}
-	klocek_1[numerekX] = 220 - (max * 30);
-	klocek_1[numerekY] = Bx;
-}
 
 void repaintWindow(HWND hWnd, HDC &hdc, PAINTSTRUCT &ps, RECT *drawArea)
 {
@@ -405,7 +382,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case ID_BUTTON6:
 			if (numer_klockaX > 1) {
 				Zlapane = false;
-
 				numer_klockaX -= 2;
 				numer_klockaY -= 2;
 			}
@@ -419,9 +395,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				Zlap = false;
 				numerek = 1;
 			}
-			else
+			else {
 				Zlap = true;
-			Zlapane = false;
+				Zlapane = false;
+			}
 			break;
 			
 		default:
