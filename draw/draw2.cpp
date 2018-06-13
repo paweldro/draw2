@@ -23,7 +23,11 @@ bool Zlap = false;
 bool Zlapane = false;
 double Pi = 3.14;
 <<<<<<< HEAD
+<<<<<<< HEAD
 int Ramie = 200; //
+=======
+int Ramie = 100; 
+>>>>>>> 51a40461f4133d530e02f833d6b4dc6cf62fcd7b
 =======
 int Ramie = 100; 
 >>>>>>> 51a40461f4133d530e02f833d6b4dc6cf62fcd7b
@@ -63,9 +67,12 @@ void MyOnPaint(HDC hdc)
 	Pen pen2(Color(255, 255, 0, 0));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	graphics.DrawLine(&pen, 0, 500, 1000, 500); //
 	graphics.DrawLine(&pen, 500, 0, 500, 1000);
 =======
+=======
+>>>>>>> 51a40461f4133d530e02f833d6b4dc6cf62fcd7b
 	graphics.DrawLine(&pen, 0, 250, 500, 250); 
 	graphics.DrawLine(&pen, 250, 0, 250, 500);
 >>>>>>> 51a40461f4133d530e02f833d6b4dc6cf62fcd7b
@@ -126,6 +133,7 @@ void MyOnPaint(HDC hdc)
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//klocek_1[numer_klockaX] = 220 - (max * 30);
 		graphics.DrawRectangle(&pen, klocek_1[0], klocek_1[1], 60, 60);
 		graphics.DrawRectangle(&pen, klocek_1[2], klocek_1[3], 60, 60);
@@ -135,6 +143,8 @@ void MyOnPaint(HDC hdc)
 		graphics.DrawRectangle(&pen, klocek_1[10], klocek_1[11], 60, 60);
 		graphics.DrawRectangle(&pen2, klocek_1[numer_klockaY], klocek_1[numer_klockaX], 60, 60);
 =======
+=======
+>>>>>>> 51a40461f4133d530e02f833d6b4dc6cf62fcd7b
 		graphics.DrawRectangle(&pen, klocek_1[0], klocek_1[1], 30, 30);
 		graphics.DrawRectangle(&pen, klocek_1[2], klocek_1[3], 30, 30);
 		graphics.DrawRectangle(&pen, klocek_1[4], klocek_1[5], 30, 30);
@@ -430,6 +440,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case ID_BUTTON7:
 			if (Bx >= klocek_1[0] && Bx <= (klocek_1[0] + 60) && By >= klocek_1[1] && By <= (klocek_1[1] + 60))
 			{
@@ -456,6 +467,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 			break;
 
+=======
+>>>>>>> 51a40461f4133d530e02f833d6b4dc6cf62fcd7b
 =======
 >>>>>>> 51a40461f4133d530e02f833d6b4dc6cf62fcd7b
 		case ID_RBUTTON1:
