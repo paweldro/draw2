@@ -38,7 +38,7 @@ int max = 0;
 int numer_klockaX = 1;
 int numer_klockaY = 0;
 
-int klocek_1[13] = { 270,120,100,150,130,150,160,150,190,150,220,150 };
+int klocek_1[13] = { 65,220,100,220,135,220,170,220,205,220,240,220 };
 
 
 std::vector<Point> data;
