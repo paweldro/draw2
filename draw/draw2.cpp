@@ -21,9 +21,8 @@ INT value;
 HWND hwndButton;
 bool Zlap = false;
 bool Zlapane = false;
-bool puscilem = false;
 double Pi = 3.14;
-int Ramie = 100; //
+int Ramie = 100; 
 int Alfa = 45;
 int Beta = 0;
 int numerek = 0;
@@ -59,7 +58,7 @@ void MyOnPaint(HDC hdc)
 	Pen pen(Color(255, 0, 0, 255));
 	Pen pen2(Color(255, 255, 0, 0));
 
-	graphics.DrawLine(&pen, 0, 250, 500, 250); //
+	graphics.DrawLine(&pen, 0, 250, 500, 250); 
 	graphics.DrawLine(&pen, 250, 0, 250, 500);
 
 	Ax = Ramie * cos(Alfa *Pi / 180) + Ox;
@@ -117,7 +116,6 @@ void MyOnPaint(HDC hdc)
 			max = 0;
 		}
 
-		//klocek_1[numer_klockaX] = 220 - (max * 30);
 		graphics.DrawRectangle(&pen, klocek_1[0], klocek_1[1], 30, 30);
 		graphics.DrawRectangle(&pen, klocek_1[2], klocek_1[3], 30, 30);
 		graphics.DrawRectangle(&pen, klocek_1[4], klocek_1[5], 30, 30);
@@ -318,24 +316,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		(HMENU)ID_BUTTON6,                   // the ID of your button
 		hInstance,                            // the instance of your application
 		NULL);
-	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
-		TEXT("Zlap mnie"),                  // the caption of the button
-		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
-		600, 240,                                  // the left and top co-ordinates
-		100, 50,                              // width and height
-		hWnd,                                 // parent window handle
-		(HMENU)ID_BUTTON7,                   // the ID of your button
-		hInstance,                            // the instance of your application
-		NULL);
-	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
-		TEXT("Mo¿esz ju¿ mnie puœciæ "),                  // the caption of the button
-		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
-		600, 310,                                  // the left and top co-ordinates
-		300, 50,                              // width and height
-		hWnd,                                 // parent window handle
-		(HMENU)ID_BUTTON8,                   // the ID of your button
-		hInstance,                            // the instance of your application
-		NULL);
 
 	hwndButton = CreateWindow(TEXT("button"), TEXT("Zlap klocek "),
 		WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX,
@@ -429,32 +409,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			repaintWindow(hWnd, hdc, ps, NULL);
 			break;
 
-		case ID_BUTTON7:
-			if (Bx >= klocek_1[0] && Bx <= (klocek_1[0] + 30) && By >= klocek_1[1] && By <= (klocek_1[1] + 30))
-			{
-				Zlapane = true;
-
-				klocek_1[0] = Bx;
-				klocek_1[1] = By;
-			}
-			break;
-
-		case ID_BUTTON8:
-			//if (Bx == klocek_1[0] && By == klocek_1[1] )
-			//{
-			//puscilem = true;
-			//klocek_1[0] = Bx;
-			//klocek_1[1] = By;
-			//	}
-			Klocek(numer_klockaX, numer_klockaY);
-			puscilem = true;
-			//for (int i = Bx - 250; i < Bx - 220; i++) {
-			//	warstwa[Bx] ++;
-			//	}
-
-
-			break;
-
 		case ID_RBUTTON1:
 			if (Zlap == true)
 			{
@@ -466,56 +420,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				Zlap = true;
 			Zlapane = false;
 			break;
-			/*
-			case ID_RBUTTON2:
-			if (Zlap == true)
-			{
-			Zlapane = false;
-			Zlap = false;
-			}
-			else
-			Zlap = true;
-			break;
-
-			case ID_RBUTTON3:
-			if (Zlap == true)
-			{
-			Zlapane = false;
-			Zlap = false;
-			}
-			else
-			Zlap = true;
-			break;
-
-			case ID_RBUTTON4:
-			if (Zlap == true)
-			{
-			Zlapane = false;
-			Zlap = false;
-			}
-			else
-			Zlap = true;
-			break;
-
-			case ID_RBUTTON5:
-			if (Zlap == true)
-			{
-			Zlapane = false;
-			Zlap = false;
-			}
-			else
-			Zlap = true;
-			break;
-
-			case ID_RBUTTON6:
-			if (Zlap == true)
-			{
-			Zlapane = false;
-			Zlap = false;
-			}
-			else
-			Zlap = true;
-			break;*/
+			
 		default:
 			return DefWindowProc(hWnd, message, wParam, lParam);
 		}
