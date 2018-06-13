@@ -38,7 +38,7 @@ int max = 0;
 int numer_klockaX = 1;
 int numer_klockaY = 0;
 
-int klocek_1[13] = { 270,120,100,150,130,150,160,150,190,150,220,150 };
+int klocek_1[13] = { 65,220,100,220,135,220,170,220,205,220,240,220 };
 
 
 std::vector<Point> data;
@@ -419,12 +419,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				Zlapane = false;
 			numer_klockaX += 2;
 			numer_klockaY += 2;
+			repaintWindow(hWnd, hdc, ps, NULL);
 			break;
 		case ID_BUTTON6:
 			if (numer_klockaX > 0)
 				Zlapane = false;
 			numer_klockaX -= 2;
 			numer_klockaY -= 2;
+			repaintWindow(hWnd, hdc, ps, NULL);
 			break;
 
 		case ID_BUTTON7:
