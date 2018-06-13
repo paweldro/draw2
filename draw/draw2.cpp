@@ -395,27 +395,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 
 		case ID_BUTTON5:
-			if (numer_klockaX < 13)
+			if (numer_klockaX < 11) {
 				Zlapane = false;
-			numer_klockaX += 2;
-			numer_klockaY += 2;
-			if (numer_klockaX > 9)
-			{
-				numer_klockaX = - 1;
-				numer_klockaY = 0;
+				numer_klockaX += 2;
+				numer_klockaY += 2;
 			}
 			repaintWindow(hWnd, hdc, ps, NULL);
 			break;
 		case ID_BUTTON6:
-			if (numer_klockaX < 0)
+			if (numer_klockaX > 1) {
 				Zlapane = false;
-			
-			numer_klockaX -= 2;
-			numer_klockaY -= 2;
-			if (numer_klockaX < -1) 
-			{
-				numer_klockaX = 9;
-				numer_klockaY = 10;
+
+				numer_klockaX -= 2;
+				numer_klockaY -= 2;
 			}
 			repaintWindow(hWnd, hdc, ps, NULL);
 			break;
