@@ -417,6 +417,15 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		(HMENU)ID_BUTTON8,                   // the ID of your button
 		hInstance,                            // the instance of your application
 		NULL);
+	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
+		TEXT("reset"),                  // the caption of the button
+		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
+		590, 370,                                  // the left and top co-ordinates
+		150, 50,                              // width and height
+		hWnd,                                 // parent window handle
+		(HMENU)ID_BUTTON9,                   // the ID of your button
+		hInstance,                            // the instance of your application
+		NULL);
 
 	hwndButton = CreateWindow(TEXT("button"), TEXT("Zlap klocek "),
 		WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX,
@@ -521,6 +530,32 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			Auto = true;
 			SetTimer(hWnd, TMR_1, 25, 0);
 			repaintWindow(hWnd, hdc, ps, NULL);
+			break;
+		case ID_BUTTON9:
+			 Auto = false;
+			 Zlap = false;
+			 Zlapane = false;
+			 Alfa = 45;
+			 Beta = 0;
+			 numerek = 0;
+			 max = 0;
+
+			 col = 0;
+			 Ox = 250;
+			 Oy = 250;
+			 dima = 0;
+
+			 warstwa[250] = { 0 };
+			 numer_klockaX = 1;
+			 numer_klockaY = 0;
+
+			 klocek_1[0] = 65; klocek_1[1] = 220; klocek_1[2] = 100; klocek_1[3] = 220; klocek_1[4] = 135; klocek_1[5] = 220;
+			 klocek_1[6] = 170; klocek_1[7] = 220; klocek_1[8] = 205; klocek_1[9] = 220; klocek_1[10] = 240; klocek_1[11] = 220;
+			 miejsce[0] = 350;
+			 miejsce[1] = 220;
+			 kont_2 = 0;
+
+			 repaintWindow(hWnd, hdc, ps, NULL);
 			break;
 
 		case ID_RBUTTON1:
