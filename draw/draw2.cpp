@@ -400,7 +400,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		hInstance,                            // the instance of your application
 		NULL);
 	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
-		TEXT("no auto"),                  // the caption of the button
+		TEXT("auto off"),                  // the caption of the button
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
 		750, 270,                                  // the left and top co-ordinates
 		150, 50,                              // width and height
@@ -409,7 +409,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		hInstance,                            // the instance of your application
 		NULL);
 	hwndButton = CreateWindow(TEXT("button"),                      // The class name required is button
-		TEXT("auto"),                  // the caption of the button
+		TEXT("auto on"),                  // the caption of the button
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  // the styles
 		590, 270,                                  // the left and top co-ordinates
 		150, 50,                              // width and height
